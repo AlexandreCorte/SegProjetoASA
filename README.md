@@ -1,2 +1,2 @@
-# SegProjetoASA
-Segundo projeto de ASA
+# SegProjASA
+Segundo Projeto de ASA
