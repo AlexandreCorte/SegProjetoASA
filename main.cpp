@@ -65,7 +65,7 @@ int dfs_visit(int position)
     return 0;
 }
 
-int DFS()
+int find_cycles()
 {
     for (int i = 1; i <= vertices; i++)
     {
@@ -92,7 +92,7 @@ void dfs_visit_v1(int position)
     }
 }
 
-void dfs_visit_v3(int position){
+void dfs_visit_ancestors(int position){
     int size = array_v[position].adj.size();
     for (int i = 0; i != size; i++)
     {
@@ -103,14 +103,14 @@ void dfs_visit_v3(int position){
                 ordered_ancestors.erase(iter);
             }
         }
-        dfs_visit_v3(array_v[position].adj[i]);
+        dfs_visit_ancestors(array_v[position].adj[i]);
     }
 }
 
-void DFS_3(){
+void remove_ancestors(){
     for (int i=1; i<=vertices; i++){
         if (array_v[i].color==4){
-            dfs_visit_v3(i);
+            dfs_visit_ancestors(i);
         }
     }
 }
@@ -129,7 +129,7 @@ void dfs_visit_v2(int position)
     }
 }
 
-void print_result()
+void print_answer()
 {
     if (ordered_ancestors.empty())
     {
@@ -154,12 +154,12 @@ int main()
         printf("0\n");
         return 0;
     }
-    if(DFS()==-1){
+    if(find_cycles()==-1){
         return 0;
     }
     dfs_visit_v1(v1);
     dfs_visit_v2(v2);
-    DFS_3();
-    print_result();
+    remove_ancestors();
+    print_answer();
     return 0;
 }
